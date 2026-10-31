@@ -7,11 +7,12 @@ computes how far the target is from the center of the picture. It sends that
 offset to an ESP32 over I²C. The ESP32 turns the offset into PWM for two
 servos, so the camera keeps the target in the middle of the frame.
 
-![detection demo](docs/images/demo_detect.png)
+![detection demo](docs/images/demo_detect.jpg)
 
 *Green box: tracked target. Green cross: target center. Yellow cross: frame
-center. The program prints `dx=108 dy=83` — the offset the gimbal has to
-remove.*
+center. The program prints `dx=-174 dy=124` — the offset the gimbal has to
+remove. The red cap on the right is also a valid red object (`候选色块数: 2`),
+and the detector deliberately ignores it: the target is the largest blob.*
 
 ## Status
 
@@ -104,7 +105,8 @@ Output:
 
 ```
 候选色块数: 2（>2000 像素的才算候选）
-目标 area=48005  框=(628,309) 241x269  中心=(748,443)  画面中心=(640,360)  dx=108 dy=83
+目标 area=51199  框=(334,346) 265x277  中心=(466,484)  画面中心=(640,360)  dx=-174 dy=124
+另外 1 个候选比它小，已忽略
 ```
 
 `dx = target_x - 640`, `dy = target_y - 360`. In image coordinates +x is right
